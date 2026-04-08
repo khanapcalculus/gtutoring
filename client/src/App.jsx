@@ -101,13 +101,45 @@ function SineWaveBackground() {
   return <canvas ref={canvasRef} className="sine-canvas" />
 }
 
+const COLORS = ['#6366f1','#f43f5e','#10b981','#a78bfa','#fbbf24','#38bdf8']
+
+function RisingParticles() {
+  const particles = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    left: `${5 + Math.random() * 90}%`,
+    bottom: `${Math.random() * 20}%`,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    size: 3 + Math.random() * 5,
+    duration: `${6 + Math.random() * 10}s`,
+    delay: `${Math.random() * 8}s`,
+  }))
+
+  return (
+    <>
+      {particles.map(p => (
+        <div key={p.id} className="particle-dot" style={{
+          left: p.left,
+          bottom: p.bottom,
+          background: p.color,
+          width: p.size,
+          height: p.size,
+          boxShadow: `0 0 ${p.size * 2}px ${p.color}`,
+          animationDuration: p.duration,
+          animationDelay: p.delay,
+        }} />
+      ))}
+    </>
+  )
+}
+
 function SciFiIcons() {
   return (
     <>
-      <div className="sci-icon sci-icon-1">⌬</div>
+      <div className="sci-icon sci-icon-1">⚛</div>
       <div className="sci-icon sci-icon-2">∫</div>
-      <div className="sci-icon sci-icon-3">⚛</div>
-      <div className="sci-icon" style={{ top: '60%', right: '10%', fontSize: '2rem' }}>θ</div>
+      <div className="sci-icon sci-icon-3">⌬</div>
+      <div className="sci-icon sci-icon-4">θ</div>
+      <div className="sci-icon sci-icon-5">∑</div>
     </>
   )
 }
@@ -178,6 +210,7 @@ function HomePage() {
   return (
     <div className="app">
       <SineWaveBackground />
+      <RisingParticles />
       <SciFiIcons />
 
       <nav className="navbar glass">
