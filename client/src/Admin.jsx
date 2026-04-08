@@ -17,7 +17,6 @@ function Admin() {
         navigate('/login')
         return
       }
-
       try {
         const response = await fetch(`${API_URL}/api/admin/data`, {
           headers: { 'Authorization': token }
@@ -27,9 +26,7 @@ function Admin() {
           setData(result)
         } else {
           setError(result.error || 'Failed to fetch data')
-          if (response.status === 401 || response.status === 403) {
-            navigate('/login')
-          }
+          if (response.status === 401 || response.status === 403) navigate('/login')
         }
       } catch (err) {
         setError('Connection failed')
@@ -37,7 +34,6 @@ function Admin() {
         setLoading(false)
       }
     }
-
     fetchAdminData()
   }, [navigate, API_URL])
 
@@ -66,35 +62,43 @@ function Admin() {
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Group ID</th>
+                  <th>Group Name</th>
                   <th>Subject</th>
                   <th>Grade</th>
                   <th>Curriculum</th>
                   <th>Type</th>
-                  <th>Members Details</th>
+                  <th>Members</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map(group => (
                   <tr key={group.id}>
-                    <td>#{group.id}</td>
+                    <td><strong>{group.name || `#${group.id}`}</strong></td>
                     <td>{group.subject}</td>
                     <td>{group.grade}</td>
                     <td>{group.curriculum}</td>
-                    <td>{group.type}</td>
+                    <td>
+                      <span className={`status-badge available`}>
+                        {group.type === 'One to One Tutoring' ? '1-to-1' : 'Group'}
+                      </span>
+                    </td>
                     <td>
                       <div className="members-detailed-cell">
-                        {group.members.map((m, i) => (
-                          <div key={i} className="member-detail-row">
-                            <strong>{m.studentName}</strong> 
-                            <span className="text-dim"> (Parent: {m.parentName})</span>
-                          </div>
-                        ))}
+                        {group.members.length === 0
+                          ? <span className="text-dim">No members yet</span>
+                          : group.members.map((m, i) => (
+                            <div key={i} className="member-detail-row">
+                              <strong>{m?.studentName || 'N/A'}</strong>
+                              <span className="text-dim"> (Parent: {m?.parentName || 'N/A'})</span>
+                              {m?.email && <><br /><span className="text-dim">✉ {m.email}</span></>}
+                              {m?.phone && <><br /><span className="text-dim">📞 {m.phone}</span></>}
+                            </div>
+                          ))}
                       </div>
                     </td>
                     <td>
-                      <span className={`status-badge ${group.status.toLowerCase()}`}>
+                      <span className={`status-badge ${(group.status || 'available').toLowerCase()}`}>
                         {group.status}
                       </span>
                     </td>
