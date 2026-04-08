@@ -10,13 +10,13 @@ services:
       - key: NODE_ENV
         value: production
 
-  # Frontend Static Site
+  # Frontend Web Service
   - type: web
     name: gtutoring-frontend
-    runtime: static
+    runtime: node
     rootDir: client
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    startCommand: npm start
     envVars:
       - key: VITE_API_URL
         fromService:
