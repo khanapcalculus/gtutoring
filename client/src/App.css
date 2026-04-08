@@ -1,4 +1,4 @@
-/* ── Font: Tw Cen MT (system) with fallbacks ── */
+/* ── Font: Strait ── */
 :root {
   --primary:       #6366f1;
   --primary-hover: #4f46e5;
@@ -10,7 +10,7 @@
   --border:        rgba(255, 255, 255, 0.07);
   --glass:         rgba(255, 255, 255, 0.04);
   --success:       #10b981;
-  --font:          'Tw Cen MT', 'Century Gothic', 'Trebuchet MS', Tahoma, sans-serif;
+  --font:          'Strait', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -141,7 +141,7 @@ body::before {
 
 .logo {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -1px;
   font-family: var(--font);
 }
@@ -159,7 +159,7 @@ body::before {
 
 .hero h2 {
   font-size: 4rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -1px;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -181,22 +181,23 @@ body::before {
 .app { min-height: 100vh; }
 
 .main-layout {
-  display: grid;
-  grid-template-columns: 440px 1fr;
-  gap: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 3rem;
   position: relative;
   z-index: 1;
 }
 
 @media (max-width: 968px) {
-  .main-layout { grid-template-columns: 1fr; }
   .hero h2 { font-size: 2.5rem; }
 }
 
 /* ── Booking Form ── */
 .booking-section {
-  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  padding: 3rem;
   height: fit-content;
   position: sticky;
   top: 6rem;
@@ -212,9 +213,10 @@ body::before {
 
 .booking-section h3,
 .groups-section h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.75rem;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 2rem;
   font-family: var(--font);
   letter-spacing: 0.3px;
 }
@@ -232,11 +234,11 @@ body::before {
 }
 
 .input-group label {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 400;
   font-family: var(--font);
 }
 
@@ -284,13 +286,13 @@ body::before {
 
 /* Buttons */
 .btn-primary {
-  padding: 0.95rem;
+  padding: 1.2rem;
   background: linear-gradient(135deg, var(--primary), #7c3aed);
   color: #fff;
   border: none;
   border-radius: 0.65rem;
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 1.2rem;
   cursor: pointer;
   letter-spacing: 0.5px;
   font-family: var(--font);
@@ -312,8 +314,8 @@ body::before {
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 400;
+  font-size: 1rem;
   font-family: var(--font);
   cursor: pointer;
   text-decoration: none;

@@ -213,21 +213,7 @@ function HomePage() {
       <RisingParticles />
       <SciFiIcons />
 
-      <nav className="navbar glass">
-        <div className="container nav-content">
-          <Link to="/" className="logo-link"><h1 className="logo">GTutoring<span>.</span></h1></Link>
-          <Link to="/login" className="btn-secondary">Login</Link>
-        </div>
-      </nav>
-
-      <header className="hero">
-        <div className="container hero-content animate-fade-in">
-          <h2>Master Your Subjects Together</h2>
-          <p>Join elite group tutoring sessions. Learn, collaborate, and excel with peers at your grade level.</p>
-        </div>
-      </header>
-
-      <main className="container main-layout">
+      <main className="container main-layout simplified-layout">
         <section className="booking-section glass animate-fade-in">
           <h3>Book a Session</h3>
           <form onSubmit={handleSubmit} className="booking-form">
@@ -290,40 +276,6 @@ function HomePage() {
             </button>
             {message && <p className="form-message">{message}</p>}
           </form>
-        </section>
-
-        <section className="groups-section animate-fade-in">
-          <h3>Active Groups</h3>
-          <div className="groups-grid">
-            {groups.length === 0
-              ? <p className="text-dim">No groups available yet.</p>
-              : groups.map(group => (
-                <div key={group.id} className="group-card glass">
-                  <div className="group-header">
-                    <div>
-                      <h4>{group.name || group.subject}</h4>
-                      <p className="group-info">{group.grade} • {group.curriculum}</p>
-                    </div>
-                    <span className={`status-badge ${(group.status || 'available').toLowerCase()}`}>
-                      {group.status}
-                    </span>
-                  </div>
-                  <div className="occupancy-bar">
-                    <div className="occupancy-fill"
-                      style={{ width: `${(group.members.length / group.capacity) * 100}%` }}>
-                    </div>
-                  </div>
-                  <p className="occupancy-text">{group.members.length} / {group.capacity} students</p>
-                  <div className="members-list">
-                    {group.members.map((m, i) => (
-                      <span key={i} className="member-avatar" title={m?.studentName || 'Member'}>
-                        {m?.studentName?.[0] || '?'}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-          </div>
         </section>
       </main>
 
