@@ -224,8 +224,8 @@ function HomePage() {
                   <p className="occupancy-text">{group.members.length} / {group.capacity} students</p>
                   <div className="members-list">
                     {group.members.map((m, i) => (
-                       <span key={i} className="member-avatar" title={m.studentName}>
-                         {m.studentName[0]}
+                       <span key={i} className="member-avatar" title={m?.studentName || 'Member'}>
+                         {m?.studentName?.[0] || '?'}
                        </span>
                     ))}
                   </div>

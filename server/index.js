@@ -9,8 +9,8 @@ app.use(express.json());
 
 // In-memory data storage
 let groups = [
-  { id: 1, subject: 'Mathematics', grade: 'Grade 10', capacity: 5, members: ['Alice', 'Bob'], status: 'Available' },
-  { id: 2, subject: 'Physics', grade: 'Grade 11', capacity: 5, members: ['Charlie'], status: 'Available' }
+  { id: 1, subject: 'Mathematics', grade: 'Grade 10', curriculum: 'CBSE', type: 'Group Tutoring', capacity: 5, members: [{ studentName: 'Alice', parentName: 'John', curriculum: 'CBSE', type: 'Group Tutoring' }, { studentName: 'Bob', parentName: 'Jane', curriculum: 'CBSE', type: 'Group Tutoring' }], status: 'Available' },
+  { id: 2, subject: 'Physics', grade: 'Grade 11', curriculum: 'IB', type: 'Group Tutoring', capacity: 5, members: [{ studentName: 'Charlie', parentName: 'Drake', curriculum: 'IB', type: 'Group Tutoring' }], status: 'Available' }
 ];
 
 let groupCounter = 3;
