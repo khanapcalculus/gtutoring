@@ -5,20 +5,40 @@ import Login from './Login'
 import Admin from './Admin'
 
 const COUNTRY_CODES = [
-  { code: '+1', label: '+1 US/Canada' },
-  { code: '+44', label: '+44 UK' },
-  { code: '+91', label: '+91 India' },
-  { code: '+61', label: '+61 Australia' },
+  { code: '+1',   label: '+1   US / Canada' },
+  { code: '+44',  label: '+44  UK' },
+  { code: '+91',  label: '+91  India' },
+  { code: '+61',  label: '+61  Australia' },
+  { code: '+64',  label: '+64  New Zealand' },
+  // Middle East
   { code: '+971', label: '+971 UAE' },
   { code: '+966', label: '+966 Saudi Arabia' },
   { code: '+974', label: '+974 Qatar' },
-  { code: '+65', label: '+65 Singapore' },
-  { code: '+60', label: '+60 Malaysia' },
-  { code: '+64', label: '+64 New Zealand' },
-  { code: '+27', label: '+27 South Africa' },
-  { code: '+92', label: '+92 Pakistan' },
+  { code: '+968', label: '+968 Oman' },
+  { code: '+965', label: '+965 Kuwait' },
+  { code: '+973', label: '+973 Bahrain' },
+  // Asia
+  { code: '+852', label: '+852 Hong Kong' },
+  { code: '+65',  label: '+65  Singapore' },
+  { code: '+60',  label: '+60  Malaysia' },
+  { code: '+92',  label: '+92  Pakistan' },
   { code: '+880', label: '+880 Bangladesh' },
-  { code: '+94', label: '+94 Sri Lanka' },
+  { code: '+94',  label: '+94  Sri Lanka' },
+  { code: '+27',  label: '+27  South Africa' },
+  // Europe
+  { code: '+33',  label: '+33  France' },
+  { code: '+49',  label: '+49  Germany' },
+  { code: '+34',  label: '+34  Spain' },
+  { code: '+351', label: '+351 Portugal' },
+  { code: '+41',  label: '+41  Switzerland' },
+  { code: '+39',  label: '+39  Italy' },
+  { code: '+31',  label: '+31  Netherlands' },
+  { code: '+32',  label: '+32  Belgium' },
+  { code: '+46',  label: '+46  Sweden' },
+  { code: '+47',  label: '+47  Norway' },
+  { code: '+45',  label: '+45  Denmark' },
+  { code: '+358', label: '+358 Finland' },
+  { code: '+353', label: '+353 Ireland' },
 ]
 
 // Canvas Sine Wave Background
