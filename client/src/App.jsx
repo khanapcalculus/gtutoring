@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'
 import './App.css'
+import Login from './Login'
+import Admin from './Admin'
 
-function App() {
+function HomePage() {
   const [groups, setGroups] = useState([])
   const [formData, setFormData] = useState({
     name: '',
@@ -59,8 +62,8 @@ function App() {
     <div className="app">
       <nav className="navbar glass">
         <div className="container nav-content">
-          <h1 className="logo">GTutoring<span>.</span></h1>
-          <button className="btn-secondary">Login</button>
+          <Link to="/" className="logo-link"><h1 className="logo">GTutoring<span>.</span></h1></Link>
+          <Link to="/login" className="btn-secondary">Login</Link>
         </div>
       </nav>
 
@@ -146,6 +149,18 @@ function App() {
         <p>&copy; 2026 GTutoring. All rights reserved.</p>
       </footer>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </Router>
   )
 }
 

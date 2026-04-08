@@ -56,6 +56,26 @@ app.post('/api/book', (req, res) => {
   res.json({ message: 'Booking successful', group });
 });
 
+// Auth Endpoints
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === 'admin' && password === 'password123') {
+    res.json({ token: 'dummy-admin-token' });
+  } else {
+    res.status(401).json({ error: 'Invalid credentials' });
+  }
+});
+
+// Protected Admin Endpoint
+app.get('/api/admin/data', (req, res) => {
+  const token = req.headers['authorization'];
+  if (token === 'dummy-admin-token') {
+    res.json(groups);
+  } else {
+    res.status(403).json({ error: 'Unauthorized' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
