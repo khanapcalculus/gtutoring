@@ -161,9 +161,9 @@ function HomePage() {
   const [loading, setLoading] = useState(false)
 
   const subjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Calculus', 'English']
-  const grades = ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
+  const grades = ['KG', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
   const types = ['Group Tutoring', 'One to One Tutoring']
-  const curriculums = ['CBSE', 'ICSE', 'GCSE', 'IB', 'IGCSE', 'Others']
+  const curriculums = ['CBSE', 'ICSE', 'GCSE', 'IB', 'IGCSE', 'US', 'Canada', 'Australia', 'Others']
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
