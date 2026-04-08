@@ -16,15 +16,39 @@ let groups = [
 let groupCounter = 3;
 
 // Helper to find or create a group
-const findOrCreateGroup = (subject, grade) => {
-  // Find a group with the same subject and grade that is not full
-  let group = groups.find(g => g.subject === subject && g.grade === grade && g.members.length < g.capacity);
+const findOrCreateGroup = (subject, grade, curriculum, type) => {
+  // One-to-One sessions always get their own group
+  if (type === 'One to One Tutoring') {
+    const group = {
+      id: groupCounter++,
+      subject,
+      grade,
+      curriculum,
+      type,
+      capacity: 1,
+      members: [],
+      status: 'Available'
+    };
+    groups.push(group);
+    return group;
+  }
+
+  // Find a group with matching criteria that is not full
+  let group = groups.find(g => 
+    g.subject === subject && 
+    g.grade === grade && 
+    g.curriculum === curriculum && 
+    g.type === 'Group Tutoring' &&
+    g.members.length < g.capacity
+  );
 
   if (!group) {
     group = {
       id: groupCounter++,
       subject,
       grade,
+      curriculum,
+      type: 'Group Tutoring',
       capacity: 5,
       members: [],
       status: 'Available'
@@ -40,14 +64,16 @@ app.get('/api/groups', (req, res) => {
 });
 
 app.post('/api/book', (req, res) => {
-  const { name, subject, grade } = req.body;
+  const { studentName, parentName, subject, grade, curriculum, type } = req.body;
 
-  if (!name || !subject || !grade) {
+  if (!studentName || !parentName || !subject || !grade || !curriculum || !type) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const group = findOrCreateGroup(subject, grade);
-  group.members.push(name);
+  const group = findOrCreateGroup(subject, grade, curriculum, type);
+  
+  // Store member as an object now for more detail
+  group.members.push({ studentName, parentName, curriculum, type });
 
   if (group.members.length === group.capacity) {
     group.status = 'Full';

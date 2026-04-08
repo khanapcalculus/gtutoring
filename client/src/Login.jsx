@@ -70,7 +70,6 @@ function Login() {
             </button>
             {error && <p className="error-message">{error}</p>}
           </form>
-          <p className="hint text-dim">Hint: admin / password123</p>
         </div>
       </main>
     </div>

@@ -58,7 +58,7 @@ function Admin() {
       <main className="container admin-container animate-fade-in">
         <header className="admin-header">
           <h2>Admin Dashboard</h2>
-          <p className="text-dim">Detailed overview of all group bookings.</p>
+          <p className="text-dim">Detailed overview of all group and individual bookings.</p>
         </header>
 
         {loading ? <p>Loading data...</p> : error ? <p className="error-message">{error}</p> : (
@@ -69,7 +69,9 @@ function Admin() {
                   <th>Group ID</th>
                   <th>Subject</th>
                   <th>Grade</th>
-                  <th>Members</th>
+                  <th>Curriculum</th>
+                  <th>Type</th>
+                  <th>Members Details</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -79,10 +81,15 @@ function Admin() {
                     <td>#{group.id}</td>
                     <td>{group.subject}</td>
                     <td>{group.grade}</td>
+                    <td>{group.curriculum}</td>
+                    <td>{group.type}</td>
                     <td>
-                      <div className="members-cell">
+                      <div className="members-detailed-cell">
                         {group.members.map((m, i) => (
-                          <span key={i} className="member-name">{m}</span>
+                          <div key={i} className="member-detail-row">
+                            <strong>{m.studentName}</strong> 
+                            <span className="text-dim"> (Parent: {m.parentName})</span>
+                          </div>
                         ))}
                       </div>
                     </td>

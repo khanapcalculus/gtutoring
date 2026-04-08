@@ -4,18 +4,66 @@ import './App.css'
 import Login from './Login'
 import Admin from './Admin'
 
+function VisualElements() {
+  return (
+    <div className="visual-elements-container">
+      {/* Antigravity Particles */}
+      {[...Array(20)].map((_, i) => (
+        <div 
+          key={i} 
+          className="floating-particle" 
+          style={{ 
+            top: `${Math.random() * 100}%`, 
+            left: `${Math.random() * 100}%`,
+            animation: `drift ${5 + Math.random() * 10}s linear infinite`,
+            animationDelay: `${Math.random() * 5}s`
+          }}
+        ></div>
+      ))}
+      {/* Scientific Icons */}
+      <div className="sci-icon sci-icon-1">⌬</div>
+      <div className="sci-icon sci-icon-2">∫</div>
+      <div className="sci-icon sci-icon-3">⚛</div>
+      <div className="sci-icon" style={{ top: '60%', right: '10%', fontSize: '2rem' }}>θ</div>
+    </div>
+  )
+}
+
+function Wave() {
+  return (
+    <div className="waves-container">
+      <svg className="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g className="parallax">
+          <use href="#gentle-wave" x="48" y="0" className="wave-path" />
+          <use href="#gentle-wave" x="48" y="3" className="wave-path" />
+          <use href="#gentle-wave" x="48" y="5" className="wave-path" />
+          <use href="#gentle-wave" x="48" y="7" className="wave-path" />
+        </g>
+      </svg>
+    </div>
+  )
+}
+
 function HomePage() {
   const [groups, setGroups] = useState([])
   const [formData, setFormData] = useState({
-    name: '',
+    studentName: '',
+    parentName: '',
     subject: 'Mathematics',
-    grade: 'Grade 10'
+    grade: 'Grade 10',
+    type: 'Group Tutoring',
+    curriculum: 'CBSE'
   })
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
   const subjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Calculus', 'English']
   const grades = ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
+  const types = ['Group Tutoring', 'One to One Tutoring']
+  const curriculums = ['CBSE', 'ICSE', 'GCSE', 'IB', 'IGCSE', 'Others']
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
@@ -47,7 +95,7 @@ function HomePage() {
       if (response.ok) {
         setMessage('Successfully joined the group!')
         fetchGroups()
-        setFormData({ ...formData, name: '' })
+        setFormData({ ...formData, studentName: '', parentName: '' })
       } else {
         setMessage(data.error || 'Something went wrong')
       }
@@ -60,6 +108,8 @@ function HomePage() {
 
   return (
     <div className="app">
+      <VisualElements />
+      
       <nav className="navbar glass">
         <div className="container nav-content">
           <Link to="/" className="logo-link"><h1 className="logo">GTutoring<span>.</span></h1></Link>
@@ -72,22 +122,36 @@ function HomePage() {
           <h2>Master Your Subjects Together</h2>
           <p>Join elite group tutoring sessions. Learn, collaborate, and excel with peers at your grade level.</p>
         </div>
+        <Wave />
       </header>
 
       <main className="container main-layout">
         <section className="booking-section glass animate-fade-in">
           <h3>Book a Session</h3>
           <form onSubmit={handleSubmit} className="booking-form">
-            <div className="input-group">
-              <label>Full Name</label>
-              <input 
-                type="text" 
-                placeholder="Enter your name" 
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                required
-              />
+            <div className="grid-2">
+              <div className="input-group">
+                <label>Student's Name</label>
+                <input 
+                  type="text" 
+                  placeholder="Student name" 
+                  value={formData.studentName}
+                  onChange={(e) => setFormData({...formData, studentName: e.target.value})}
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <label>Parent's Name</label>
+                <input 
+                  type="text" 
+                  placeholder="Parent name" 
+                  value={formData.parentName}
+                  onChange={(e) => setFormData({...formData, parentName: e.target.value})}
+                  required
+                />
+              </div>
             </div>
+
             <div className="grid-2">
               <div className="input-group">
                 <label>Subject</label>
@@ -108,6 +172,28 @@ function HomePage() {
                 </select>
               </div>
             </div>
+
+            <div className="grid-2">
+              <div className="input-group">
+                <label>Tutoring Type</label>
+                <select 
+                  value={formData.type}
+                  onChange={(e) => setFormData({...formData, type: e.target.value})}
+                >
+                  {types.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+              <div className="input-group">
+                <label>Curriculum</label>
+                <select 
+                  value={formData.curriculum}
+                  onChange={(e) => setFormData({...formData, curriculum: e.target.value})}
+                >
+                  {curriculums.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+            </div>
+
             <button className="btn-primary" disabled={loading}>
               {loading ? 'Booking...' : 'Join Group'}
             </button>
@@ -127,7 +213,8 @@ function HomePage() {
                       {group.status}
                     </span>
                   </div>
-                  <p className="group-grade">{group.grade}</p>
+                  <p className="group-info">{group.grade} • {group.curriculum}</p>
+                  <p className="group-type">{group.type}</p>
                   <div className="occupancy-bar">
                     <div 
                       className="occupancy-fill" 
@@ -136,7 +223,11 @@ function HomePage() {
                   </div>
                   <p className="occupancy-text">{group.members.length} / {group.capacity} students</p>
                   <div className="members-list">
-                    {group.members.map((m, i) => <span key={i} className="member-avatar">{m[0]}</span>)}
+                    {group.members.map((m, i) => (
+                       <span key={i} className="member-avatar" title={m.studentName}>
+                         {m.studentName[0]}
+                       </span>
+                    ))}
                   </div>
                 </div>
               ))
