@@ -213,6 +213,10 @@ function HomePage() {
       <RisingParticles />
       <SciFiIcons />
 
+      <div className="top-right-login">
+        <Link to="/login" className="btn-secondary subtle-login">Admin Login</Link>
+      </div>
+
       <main className="container main-layout simplified-layout">
         <section className="booking-section glass animate-fade-in">
           <h3>Book a Session</h3>
